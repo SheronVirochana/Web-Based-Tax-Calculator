@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tax Calculator</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <header class="app-header">
+    <h1>Tax Calculator</h1>
+  </header>
+
+
+  <main class="container">
+    <nav class="tabs" role="navigation" aria-label="Calculator sections">
+      <button class="tab active" data-target="withholding">Withholding Tax</button>
+      <button class="tab" data-target="payable">Payable Tax (Monthly)</button>
+      <button class="tab" data-target="income">Income Tax (Annual)</button>
+      <button class="tab" data-target="sscl">SSCL Tax</button>
+      <button class="tab" data-target="leasing">Leasing Calculations</button>
+      <button id="resetAll" class="tab reset">Clear / Reset</button>
+    </nav>
+
+    <section id="content">
+      <section id="withholding" class="panel active" aria-labelledby="withholding-tab">
+        <h2>Withholding Tax</h2>
+        <form id="withholdingForm" class="form">
+          <div class="field">
+            <label for="withholdingType">Tax Type</label>
+            <select id="withholdingType" required>
+              <option value=""> Select </option>
+              <option value="rent">Rent Tax </option>
+              <option value="bank">Bank Interest Tax</option>
+              <option value="dividend">Dividend Tax</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="withholdingAmount">Amount (Rs.)</label>
+            <input id="withholdingAmount" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            <div class="inline-error" id="withholdingError"></div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Calculate</button>
+            <button type="button" id="withholdingClear" class="btn">Clear</button>
+          </div>
+
+          <div class="result-card" id="withholdingResult" aria-live="polite"></div>
+        </form>
+      </section>
+
+
+      <section id="payable" class="panel" aria-labelledby="payable-tab">
+        <h2>Payable Tax (Monthly Salary)</h2>
+        <form id="payableForm" class="form">
+          <div class="field">
+            <label for="monthlySalary">Monthly Salary (Rs.)</label>
+            <input id="monthlySalary" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            <div class="inline-error" id="payableError"></div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Calculate</button>
+            <button type="button" id="payableClear" class="btn">Clear</button>
+          </div>
+
+          <div class="result-card" id="payableResult" aria-live="polite"></div>
+        </form>
+      </section>
+
+
+      <section id="income" class="panel" aria-labelledby="income-tab">
+        <h2>Income Tax (Annual)</h2>
+        <form id="incomeForm" class="form">
+          <div class="field">
+            <label for="annualIncome">Annual Income (Rs.)</label>
+            <input id="annualIncome" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            <div class="inline-error" id="incomeError"></div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Calculate</button>
+            <button type="button" id="incomeClear" class="btn">Clear</button>
+          </div>
+
+          <div class="result-card" id="incomeResult" aria-live="polite"></div>
+        </form>
+      </section>
+
+
+      <section id="sscl" class="panel" aria-labelledby="sscl-tab">
+        <h2>SSCL Tax</h2>
+        <form id="ssclForm" class="form">
+          <div class="field">
+            <label for="ssclValue">Value (Rs.)</label>
+            <input id="ssclValue" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            <div class="inline-error" id="ssclError"></div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Calculate SSCL</button>
+            <button type="button" id="ssclClear" class="btn">Clear</button>
+          </div>
+
+          <div class="result-card" id="ssclResult" aria-live="polite"></div>
+        </form>
+      </section>
+
+
+      <section id="leasing" class="panel" aria-labelledby="leasing-tab">
+        <h2>Leasing Calculations</h2>
+
+        <div class="leasing-grid">
+
+          <form id="leasingForm" class="form card">
+            <h3>EMI from Loan</h3>
+            <div class="field">
+              <label for="loanPrincipal">Loan Amount </label>
+              <input id="loanPrincipal" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            </div>
+
+            <div class="field">
+              <label for="leasingInterest">Annual Interest Rate </label>
+              <input id="leasingInterest" type="number" min="0.0001" step="0.01" placeholder="e.g. 10" required />
+            </div>
+
+            <div class="field">
+              <label for="leasingYears">Years </label>
+              <input id="leasingYears" type="number" min="1" max="5" step="1" placeholder="1 - 5" required />
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Calculate EMI</button>
+              <button type="button" id="leasingClear" class="btn">Clear</button>
+            </div>
+
+            <div class="result-card" id="leasingResult" aria-live="polite"></div>
+          </form>
+
+
+          <form id="reverseLeasingForm" class="form card">
+            <h3>Max Loan from Monthly Payment</h3>
+            <div class="field">
+              <label for="monthlyPayment">Monthly Payment </label>
+              <input id="monthlyPayment" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+            </div>
+
+            <div class="field">
+              <label for="reverseInterest">Annual Interest Rate</label>
+              <input id="reverseInterest" type="number" min="0.0001" step="0.01" placeholder="e.g. 10" required />
+            </div>
+
+            <div class="field">
+              <label for="reverseYears">Years </label>
+              <input id="reverseYears" type="number" min="1" max="5" step="1" placeholder="1 - 5" required />
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Calculate Max Loan</button>
+              <button type="button" id="reverseClear" class="btn">Clear</button>
+            </div>
+
+            <div class="result-card" id="reverseLeasingResult" aria-live="polite"></div>
+          </form>
+
+
+          <div class="card plan-compare">
+            <h3>Plan Comparison</h3>
+            <div class="field">
+              <label for="comparePrincipal">Loan Amount (Rs.)</label>
+              <input id="comparePrincipal" type="number" min="0.01" step="0.01" placeholder="0.00" />
+            </div>
+            <div class="field">
+              <label for="compareInterest">Annual Interest Rate</label>
+              <input id="compareInterest" type="number" min="0.0001" step="0.01" placeholder="e.g. 10" />
+            </div>
+            <div class="actions">
+              <button id="comparePlans" class="btn primary">Compare Plans</button>
+              <button id="compareClear" class="btn">Clear</button>
+            </div>
+            <div class="result-card" id="planCompareResult" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>© 2025 Web Based Tax Calculator</small>
+  </footer>
+
+  <script src="assets/js/app.js" defer></script>
+  </body>
+
+</html>
