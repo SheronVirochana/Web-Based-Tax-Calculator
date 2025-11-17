@@ -94,21 +94,25 @@ body {
     color: #fff;
 }
 
+
 .tab.reset {
     background: #f8d7da;
     color: #721c24;
     font-weight: 500;
 }
 
+
 .tab.reset:hover {
     background: #e63946;
     color: #fff;
 }
 
+
 .panel {
     display: none;
     padding: 1.5rem;
 }
+
 
 .panel.active {
     display: block;
